@@ -24,6 +24,10 @@ class MainActivity : AppCompatActivity() {
         toolbar.setTitleTextColor(Color.WHITE)
 
         setSupportActionBar(toolbar)
+
+        binding.btnColor.setOnCreateContextMenuListener { contextMenu, view, contextMenuInfo ->
+            menuInflater.inflate(R.menu.menu_color,contextMenu)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -48,5 +52,14 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.action_red -> binding.root.setBackgroundColor(Color.RED)
+            R.id.action_green -> binding.root.setBackgroundColor(Color.GREEN)
+        }
+
+        return super.onContextItemSelected(item)
     }
 }
